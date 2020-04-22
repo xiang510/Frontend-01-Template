@@ -1,0 +1,14 @@
+<script>
+    //　1.　匹配Number字面量　（00|(0b|0B)|(0o|0O)| (0x|0X)| eE）
+    // TODO  javascript 里面的正则好像不能识别0开头的正则表达式？
+    let regNumber = /^(\.\d+|(0|[1-9]\d*)\.?\d*?)([eE][-\+]?\d+)?$|^0[bB][01]+$|^0[oO][0-7]+$|^0[xX][0-9a-fA-F]+$/;
+
+    let regString = /^\\(\n|\r\n?|\u2028|\u2029)$|^(\n|\r\n?|\u2028|\u2029)$|^['"\\bfnrtv]$/u;
+
+    function utf8Encoding(string) {
+        // 对题目表示完全没思路
+    }
+
+    // console.log(regNumber.test(00123));
+    // console.log(regString.test('122'));
+</script>
