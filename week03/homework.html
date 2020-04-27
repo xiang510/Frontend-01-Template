@@ -1,0 +1,37 @@
+<script>
+    function convertNumberToString(num) {
+        let integer = Math.floor(num);
+        let fraction = num - integer;
+        let str = '';
+
+        while(integer > 0) {
+            console.log(integer % 10)
+            str = String( integer % 10) + str;
+            integer = Math.floor(integer / 10)
+
+        }
+
+        console.log(str)
+
+    }
+
+
+    function convertStringToNumber(str) {
+        let chars = str.split('');
+        let num = 0;
+        let len = chars.length;
+        console.log(chars[0].codePointAt(0));
+        console.log('0'.codePointAt(0))
+
+        for(let i = 0; i < len; i++) {
+            num = num * 10;
+            num += chars[i].codePointAt(0) - '0'.codePointAt(0);
+        }
+
+        console.log(num);
+        return num; 
+    }
+
+    convertStringToNumber('1232');
+    convertNumberToString(10.12);
+</script>
