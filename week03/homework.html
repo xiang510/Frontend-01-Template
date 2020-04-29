@@ -1,21 +1,22 @@
 <script>
     function convertNumberToString(num) {
         let integer = Math.floor(num);
-        let fraction = num - integer;
+        let fraction = num - integer; // TODO  这里会有精度丢失
         let str = '';
 
         while(integer > 0) {
-            console.log(integer % 10)
+            // console.log(integer % 10)
+            // TODO  这里有个疑问 为什么还要在低层方法内部使用String这个方法
             str = String( integer % 10) + str;
             integer = Math.floor(integer / 10)
 
         }
 
-        console.log(str)
-
+        // console.log(str)
+        return str;
     }
 
-
+    // 简单实现了10进制的转化
     function convertStringToNumber(str) {
         let chars = str.split('');
         let num = 0;
@@ -28,10 +29,11 @@
             num += chars[i].codePointAt(0) - '0'.codePointAt(0);
         }
 
-        console.log(num);
+        // console.log(num);
         return num; 
     }
 
     convertStringToNumber('1232');
     convertNumberToString(10.12);
+
 </script>
