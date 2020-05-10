@@ -1,0 +1,33 @@
+<script>
+    function zero(zero) {
+        if (1 / zero === Infinity) {
+            return 1;
+        }
+        if (1 / zero === -Infinity) {
+            return -1;
+        }
+    }
+
+    console.log(zero(0));
+    console.log(zero(-0));
+
+    function new_target() {
+        console.log(new.target);
+    }
+
+    new new_target();
+    class Parent {
+        constructor() {
+            this.a = 1;
+        }
+    }
+    class Children extends Parent {
+        constructor() {
+            super();
+
+            console.log(this.a);
+            console.log(super.b);
+        }
+    }
+    new Children();
+</script>
