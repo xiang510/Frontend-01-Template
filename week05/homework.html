@@ -62,49 +62,34 @@
     for (let p of names) {
       let d = Object.getOwnPropertyDescriptor(o, p);
       console.log(d);
-      // if(d.value === 'prototype') {
-      //     for(let p of d.value ) {
-      //         set.add({
-      //         name: target + ".prototype" + p ,
-      //       });
-      //     }
-
-      // }
 
       if (
-        (d.value !== null && typeof d.value === "object") ||
-        typeof d.value === "function"
+        d.value !== null && (typeof d.value === "object" || typeof d.value === "function")
       ) {
+
         if (!set.has(d.value)) {
           console.log(d.value);
           set.add({
-            name: target + "." + d.value.name,
+            name: d.value.name,
           });
         }
       }
 
-      //   if (d.get) {
-      //     if (!set.has(d.get)) {
-      //       set.add({
-      //         name: d.get,
-      //       });
+        if (d.get) {
+          if (!set.has(d.get)) {
+            set.add({
+              name: d.get,
+            });
+          }
+        }
 
-      //       console.log('xxx')
-      //       console.log(d.get)
-      //     //   realmObj.push(d.get);
-      //     }
-      //   }
-
-      //   if (d.set) {
-      //       if(!set.has(d.set)) {
-      //           set.add({
-      //               name: d.set
-      //           });
-      //           console.log('---')
-      //       console.log(d.set)
-      //         //   realmObj.push(d.set)
-      //       }
-      //   }
+        if (d.set) {
+            if(!set.has(d.set)) {
+                set.add({
+                    name: d.set
+                });
+            }
+        }
     }
   }
 
