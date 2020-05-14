@@ -1,0 +1,40 @@
+<script>
+    function matchString(str) {
+        let state = startState;
+        for (let char of str) {
+            state = state(char);
+        }
+
+        return state === end;
+    }
+
+    function startState(char) {
+        if (char === 'a') {
+            return foundAState(char);
+        } else {
+            return startState;
+        }
+    }
+
+    function foundAState(char) {
+        if (char === 'b') {
+            return foundBState(char);
+        } else {
+            return startState;
+        }
+    }
+
+    function foundBState(char) {
+        if (char === 'c') {
+            return foundCState(char);
+        } else {
+            return startState;
+        }
+    }
+
+    function foundCState(char) {}
+
+    function endState(char) {
+        return endState;
+    }
+</script>
