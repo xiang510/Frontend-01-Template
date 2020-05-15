@@ -1,16 +1,19 @@
 <script>
+
+    // abababx
+
     function matchString(str) {
         let state = startState;
         for (let char of str) {
             state = state(char);
         }
 
-        return state === end;
+        return state === endState;
     }
 
     function startState(char) {
         if (char === 'a') {
-            return foundAState(char);
+            return foundAState;
         } else {
             return startState;
         }
@@ -18,23 +21,25 @@
 
     function foundAState(char) {
         if (char === 'b') {
-            return foundBState(char);
+            return foundBState;
         } else {
             return startState;
         }
     }
 
     function foundBState(char) {
-        if (char === 'c') {
-            return foundCState(char);
+        if (char === 'x') {
+            return endState;
         } else {
             return startState;
         }
     }
 
-    function foundCState(char) {}
 
     function endState(char) {
         return endState;
     }
+
+    console.log(matchString('as ababab11'));
+    console.log(matchString('asdf abababababxb 1ff'));
 </script>
