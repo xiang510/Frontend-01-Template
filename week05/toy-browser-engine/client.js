@@ -227,8 +227,10 @@ void (async function () {
             'Content-Type': 'application/json',
         },
     });
-    let result = await req.send();
-    console.log(result);
+    let response = await req.send();
+    let dom = parserHTML(response.body);
+
+    console.log(dom);
 })();
 
 // const client = net.createConnection(
