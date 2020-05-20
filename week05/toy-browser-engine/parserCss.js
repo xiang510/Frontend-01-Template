@@ -3,6 +3,7 @@ const css = require("css");
 module.exports = class ParserCSS {
   constructor() {
     this.rules = [];
+    this.stack = [];
   }
 
   addCSSRules(text) {
@@ -67,8 +68,20 @@ module.exports = class ParserCSS {
     return (sp1[3] = sp2[3]);
   }
 
+  getAllElements(element) {
+   
+    if(element.parent) {
+        this.stack.push(element);
+        return getAllElements(element.parent);
+    }
+
+  }
+
   computeCSS(element) {
-    let elements = element.parent.slice().reverse();
+    this.getAllElements(element);
+
+    let elements = this.stack.reverse();
+
 
     if (element.computedStyle) {
       element.computedStyle = {};
