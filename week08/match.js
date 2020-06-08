@@ -6,9 +6,31 @@ parser.registerNestingOperators('>', '+', '~');
 parser.registerAttrEqualityMods('^', '$', '*', '~');
 parser.enableSubstitutes();
 
-let pattern = parser.parse('#wrap div > a');
 // console.log(JSON.stringify(parser.parse('#wrap div > a'), false, '    '));
 
+/* 
+
+    {
+        "type": "ruleSet",
+        "rule": {
+            "id": "wrap",
+            "type": "rule",
+            "rule": {
+                "tagName": "div",
+                "nestingOperator": null,
+                "type": "rule",
+                "rule": {
+                    "tagName": "a",
+                    "nestingOperator": ">",
+                    "type": "rule"
+                }
+            }
+        }
+    }
+
+*/
+
+let pattern = null;
 let parents = [];
 let rules = [];
 
@@ -23,6 +45,12 @@ function getParent(e) {
 function getRules(pattern) {
     if (!pattern) return;
 }
-function match(element) {
+function match(selector, element) {
+
+    pattern = parser.parse(selector);
+    
     getParent(element);
 }
+
+
+match('#wrap div > a', null)
