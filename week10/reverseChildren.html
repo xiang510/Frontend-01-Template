@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            a {
+                color: 'red';
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+        </div>
+
+        <script>
+            // let reverseChildren = function (ele) {
+            //     let children = ele.childNodes;
+            //     let l = children.length;
+
+            //     while (l-- > 0) {
+            //         ele.appendChild(children[l]);
+            //     }
+            // };
+
+            let reverseChildren = function (ele) {
+                console.log(ele.childNodes);
+                let range = new Range();
+                range.selectNodeContents(ele);
+
+                let fragment = range.extractContents();
+
+                let l = fragment.childNodes.length;
+                while (l-- > 0) {
+                    fragment.appendChild(fragment.childNodes[l]);
+                }
+                // console.log(fragment);
+
+                ele.appendChild(fragment);
+            };
+
+            let target = document.getElementById('wrap');
+            reverseChildren(target);
+        </script>
+    </body>
+</html>
