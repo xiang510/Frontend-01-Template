@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            ul,
+            li {
+                list-style: none;
+            }
+            ul {
+                width: 120px;
+            }
+            li {
+                width: 40px;
+                height: 40px;
+                border: 1px solid #fff;
+                box-sizing: border-box;
+            }
+            .item {
+                float: left;
+                background-color: green;
+                text-align: center;
+                line-height: 40px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <ul id="box">
+                <!-- <li class="item">⭕️</li>
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item">❌</li>
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li> -->
+            </ul>
+        </div>
+        <script>
+            let pattern = [
+                [2, 0, 0],
+                [0, 1, 0],
+                [0, 0, 0],
+            ];
+            let role = 1;
+            // ❌ ⭕️
+            function layout() {
+                let target = document.getElementById('box');
+                target.innerHTML = '';
+
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        let li = document.createElement('li');
+                        li.classList.add('item');
+                        li.innerText =
+                            pattern[i][j] === 2
+                                ? '❌'
+                                : pattern[i][j] === 1
+                                ? '⭕️'
+                                : '';
+                        li.addEventListener('click', () => move(j, i));
+                        target.appendChild(li);
+                    }
+                }
+            }
+            layout();
+
+            function move(x, y) {
+                if (pattern[y][x]) return;
+                pattern[y][x] = role;
+
+                console.log(computed(pattern, role));
+                if (computed(pattern, role)) {
+                    alert(role === 1 ? '⭕️ is winer' : '❌ is winer');
+                }
+                // if (whoWin(role)) {
+                //     console.log(
+                //         role === 1 ? '⭕️ will be winer' : '❌ will be winer'
+                //     );
+                // }
+                role = 3 - role;
+                layout();
+            }
+
+            function computed(pattern, role) {
+                let result = true;
+
+                for (let i = 0; i < 3; i++) {
+                    for (j = 0; j < 3; j++) {
+                        if (pattern[i][j] != role) {
+                            result = false;
+                            break;
+                        }
+                    }
+                }
+
+                for (let i = 0; i < 3; i++) {
+                    for (j = 0; j < 3; j++) {
+                        if (pattern[j][i] != role) {
+                            result = false;
+                            break;
+                        }
+                    }
+                }
+
+                for (let i = 0; i < 3; i++) {
+                    if (pattern[i][i] != role) {
+                        result = false;
+                        break;
+                    }
+                }
+
+                for (let i = 0; i < 3; i++) {
+                    if (pattern[i][2 - i] != role) {
+                        result = false;
+                        break;
+                    }
+                }
+
+                if (result) {
+                    return role;
+                } else {
+                    return false;
+                }
+            }
+
+            function clone(pattern) {
+                return JSON.parse(JSON.stringify(pattern));
+            }
+
+            function whoWin(role) {
+                for (let i = 0; i < 3; i++) {
+                    for (j = 0; j < 3; j++) {
+                        if (pattern[j][i] != 0) {
+                            continue;
+                        }
+                        let tmp = clone(pattern);
+                        tmp[i][j] = role;
+                        if (computed(tmp, role)) {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+
+            function bestchoice(pattern, role) {
+                let point = whoWin(pattern, role);
+
+                if (point) {
+                    return {
+                        point: point,
+                        result: 1,
+                    };
+                }
+                let result = -1;
+                outer: for (let i = 0; i < 3; i++) {
+                    for (j = 0; j < 3; j++) {
+                        if (pattern[j][i] != 0) {
+                            continue;
+                        }
+                        let tmp = clone(pattern);
+                        tmp[i][j] = role;
+                        let opp = bestchoice(tmp, 3 - role);
+                        if (-opp.result >= result) {
+                            point = [j, i];
+                            result = -opp.result;
+                        }
+
+                        if (false) {
+                            break outer;
+                        }
+                    }
+                }
+                return {
+                    point: point,
+                    result: point ? result : 0,
+                };
+            }
+        </script>
+    </body>
+</html>
