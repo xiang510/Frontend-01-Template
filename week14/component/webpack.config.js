@@ -17,6 +17,12 @@ module.exports = {
                     },
                 },
             },
+            {
+                test: /\.wgt$/,
+                use: {
+                    loader: require.resolve('./myLoader.js'),
+                },
+            },
         ],
     },
     mode: 'development',

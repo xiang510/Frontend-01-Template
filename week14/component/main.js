@@ -1,4 +1,5 @@
 import { create } from './create';
+
 // class MyComponent {
 //     constructor() {
 //         // console.log(config);
@@ -95,13 +96,13 @@ class Carourel {
     }
 }
 
-// let component = (
-//     <MyComponent title="title" props="property">
-//         <div>11</div>
-//         <p>22</p>
-//         <div>33</div>
-//     </MyComponent>
-// );
+let component = (
+    <MyComponent title="title" props="property">
+        <div>11</div>
+        <p>22</p>
+        <div>33</div>
+    </MyComponent>
+);
 
 let data = [
     'https://static001.geekbang.org/resource/image/bb/21/bb38fb7c1073eaee1755f81131f11d21.jpg',
@@ -113,4 +114,4 @@ let component = <Carourel images={data}></Carourel>;
 
 component.mountTo(document.getElementById('root'));
 
-console.log(component);
+// console.log(component);
