@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <style>
+            #el {
+                width: 100px;
+                height: 100px;
+                background-color: pink;
+            }
+
+            #el2 {
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+                transition: ease 5s;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="el"></div>
+        <div id="el2"></div>
+        <button id="pause">pause</button>
+        <button id="resume">resume</button>
+        <script type="module">
+            import { Timeline, Animation, cubicBezier } from './animation.js';
+            let el = document.getElementById('el');
+            let pause = document.getElementById('pause');
+            let resume = document.getElementById('resume');
+            // let linear = (t) => t;
+            let ease = cubicBezier(0.25, 0.1, 0.25, 1);
+            let animation = new Animation(
+                el.style,
+                'transform',
+                (v) => `translateX(${v}px)`,
+                0,
+                300,
+                5000,
+                0,
+                ease
+            );
+            let timeline = new Timeline();
+            timeline.add(animation);
+            timeline.start();
+            let el2 = document.getElementById('el2');
+            // el2.style.transform = 'translateX(300px)';
+
+            pause.addEventListener('click', () => timeline.pause());
+            resume.addEventListener('click', () => timeline.resume());
+        </script>
+    </body>
+</html>
