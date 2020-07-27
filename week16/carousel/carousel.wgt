@@ -1,0 +1,14 @@
+<template>
+    <div>
+        <img />
+    </div>
+</template>
+
+<script>
+    export default {
+        el: '#exp',
+        data: {
+            message: 'Hello',
+        },
+    };
+</script>
